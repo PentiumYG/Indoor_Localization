@@ -11,14 +11,20 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
-    TextView accX, accY, accZ, magX, magY, magZ, stepC, deg, dist;
+    TextView accX, accY, accZ, magX, magY, magZ, stepC, deg, dist, strideL;
     Switch accSwi, magSwi;
+    EditText height;
+    RadioButton gender;
+    RadioGroup rg;
 
     double prevDisplacement = 0;
     Integer stepCount = 0;
@@ -28,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     float[] geoMagneticField;
     float azimut;
     float currentDeg = 0f;
+    float strideLength;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +52,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         stepC = (TextView) findViewById(R.id.steps);
         deg = (TextView) findViewById(R.id.degrees);
         dist = (TextView) findViewById(R.id.distance);
+        strideL = (TextView) findViewById(R.id.stride);
 
-        //Switch Ids Fetched
-        accSwi = (Switch) findViewById(R.id.accSwitch);
-        magSwi = (Switch) findViewById(R.id.magSwitch);
+        //EditText ids fetched
+        height = (EditText) findViewById(R.id.heightInput);
 
+        rg = (RadioGroup) findViewById(R.id.rgroup);
+
+
+
+
+        //fectching height
+        height.setText("0");
+        float heightcm = Float.parseFloat(height.getText().toString());
 
         //Sensor Service
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -125,7 +140,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
                     stepC.setText(stepCount.toString());
 
-                    float distance = (float)(stepCount*78)/(float)100000;
+
+                    //Estimated stride length by multiplying person's height in cm with 0.415 for men and 0.413 for women
+                    gender = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
+                    if(gender.getText().toString().equals("Male")){
+                        strideLength = (float) (0.415 * heightcm);
+                        strideL.setText(Float.toString(strideLength));
+                    }
+                    if(gender.getText().toString().equals("Female")){
+                        strideLength = (float) (0.413 * heightcm);
+                        strideL.setText(Float.toString(strideLength));
+                    }
+
+
+                    float distance = (float)(stepCount*strideLength)/(float)100000;
                     dist.setText(Float.toString(distance));
 
                 }
