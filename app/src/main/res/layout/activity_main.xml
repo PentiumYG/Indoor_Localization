@@ -156,4 +156,68 @@
             android:textAlignment="center"
             android:layout_margin="10dp"/>
     </LinearLayout>
+
+    <!--   Direction Calculator  -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/DirectionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Direction in Degrees"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/degrees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Degrees"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+<!--    Distance Calculator  -->
+    <!--   Direction Calculator  -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/DistanceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Distance in km"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Distance"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+
+
+
+
 </LinearLayout>
