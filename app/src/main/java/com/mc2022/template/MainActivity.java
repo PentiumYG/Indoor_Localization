@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     EditText height;
     RadioButton gender;
     RadioGroup rg;
+    String genderVal;
 
     double prevDisplacement = 0;
     Integer stepCount = 0;
@@ -57,14 +58,31 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //EditText ids fetched
         height = (EditText) findViewById(R.id.heightInput);
 
+
         rg = (RadioGroup) findViewById(R.id.rgroup);
+        rg.clearCheck();
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                gender = (RadioButton) findViewById(i);
+                genderVal = gender.getText().toString();
+//                    Toast.makeText(MainActivity.this, genderVal, Toast.LENGTH_SHORT).show();
+                Log.i("Gender", (String) gender.getText());
 
+                //Estimated stride length by multiplying person's height in cm with 0.415 for men and 0.413 for women
+                if(genderVal.equals("Male")){
+                    float heightcm = Float.parseFloat(height.getText().toString());
+                    strideLength = (float) (0.415 * heightcm);
+                    strideL.setText(Float.toString(strideLength));
+                }
+                if(genderVal.equals("Female")){
+                    float heightcm = Float.parseFloat(height.getText().toString());
+                    strideLength = (float) (0.413 * heightcm);
+                    strideL.setText(Float.toString(strideLength));
+                }
 
-
-
-        //fectching height
-        height.setText("0");
-        float heightcm = Float.parseFloat(height.getText().toString());
+            }
+        });
 
         //Sensor Service
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -140,17 +158,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
                     stepC.setText(stepCount.toString());
 
-
-                    //Estimated stride length by multiplying person's height in cm with 0.415 for men and 0.413 for women
-                    gender = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
-                    if(gender.getText().toString().equals("Male")){
-                        strideLength = (float) (0.415 * heightcm);
-                        strideL.setText(Float.toString(strideLength));
-                    }
-                    if(gender.getText().toString().equals("Female")){
-                        strideLength = (float) (0.413 * heightcm);
-                        strideL.setText(Float.toString(strideLength));
-                    }
 
 
                     float distance = (float)(stepCount*strideLength)/(float)100000;
