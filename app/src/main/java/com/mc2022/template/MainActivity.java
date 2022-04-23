@@ -65,6 +65,29 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
+        magSwi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(magSwi.isChecked()){
+                    Sensor magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+                    if(magnetometer !=null){
+                        sensorManager.registerListener((SensorEventListener) MainActivity.this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
+                        Toast.makeText(MainActivity.this, "Magnetometer Sensor Activated..!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Log.i("Magne-check","Magnetometer NOT Supported!!");
+                    }
+                }
+                else{
+                    sensorManager.unregisterListener(MainActivity.this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD));
+                    magX.setText("0");
+                    magY.setText("0");
+                    magZ.setText("0");
+                    Toast.makeText(MainActivity.this, "Magnetometer Sensor De-Activated..!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
 
     }
@@ -73,12 +96,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent sensorEvent) {
         Sensor sensor = sensorEvent.sensor;
         if(sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            Log.i("Value-check", "ACCELEROMETER X-axis:" + sensorEvent.values[0] + "Y-axis:" + sensorEvent.values[1]
+            Log.i("ACCELEROMETER", "X-axis:" + sensorEvent.values[0] + "Y-axis:" + sensorEvent.values[1]
                     + "Z-axis:" + sensorEvent.values[2]);
 
             accX.setText(Float.toString(sensorEvent.values[0]));
             accY.setText(Float.toString(sensorEvent.values[1]));
             accZ.setText(Float.toString(sensorEvent.values[2]));
+
+
+        }
+        else if(sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+            Log.i("MAGNETOMETER", "X-axis:" + sensorEvent.values[0] + "Y-axis:" + sensorEvent.values[1]
+                    + "Z-axis:" + sensorEvent.values[2]);
+
+            magX.setText(Float.toString(sensorEvent.values[0]));
+            magY.setText(Float.toString(sensorEvent.values[1]));
+            magZ.setText(Float.toString(sensorEvent.values[2]));
 
 
         }
