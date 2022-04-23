@@ -16,8 +16,12 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
-    TextView accX, accY, accZ, magX, magY, magZ;
+    TextView accX, accY, accZ, magX, magY, magZ, stepC;
     Switch accSwi, magSwi;
+
+    double prevDisplacement = 0;
+    Integer stepCount = 0;
+    Integer threshold = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         magX = (TextView) findViewById(R.id.magX);
         magY = (TextView) findViewById(R.id.magY);
         magZ = (TextView) findViewById(R.id.magZ);
+        stepC = (TextView) findViewById(R.id.steps);
 
         //Switch Ids Fetched
         accSwi = (Switch) findViewById(R.id.accSwitch);
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
 
+        //Accelerometer sensor
         accSwi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -65,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
+        //magnetic field sensor
         magSwi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -88,6 +95,37 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
+
+        //Step detection
+        Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        SensorEventListener totalSteps = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                Sensor sensorStep = sensorEvent.sensor;
+                if(sensorStep != null){
+                    float accelX = sensorEvent.values[0];
+                    float accelY = sensorEvent.values[1];
+                    float accelZ = sensorEvent.values[2];
+
+                    double displacement = Math.sqrt((accelX * accelX) + (accelY * accelY) + (accelZ * accelZ));
+                    double displacementChange = displacement - prevDisplacement;
+                    prevDisplacement = displacement;
+
+                    if(displacementChange > threshold){
+                        stepCount++;
+                    }
+                    stepC.setText(stepCount.toString());
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {
+
+            }
+        };
+
+        sensorManager.registerListener(totalSteps, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
 
     }
