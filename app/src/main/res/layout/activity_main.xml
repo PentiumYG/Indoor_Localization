@@ -30,7 +30,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Accelerometer Data"
-                    android:textSize="24dp"></TextView>
+                    android:textSize="24dp">
+                </TextView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -81,7 +82,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Magnetometer Data"
-                    android:textSize="24dp"></TextView>
+                    android:textSize="24dp">
+                </TextView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -143,6 +145,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:padding="15dp"
                     android:hint="Height in cm"
                     android:inputType="textPersonName"
                     android:text="0"
@@ -324,9 +327,6 @@
 
 
             </LinearLayout>
-
-
-
 
         </LinearLayout>
     </ScrollView>
