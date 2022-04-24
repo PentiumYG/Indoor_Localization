@@ -18,7 +18,6 @@
             android:text="Wifi Name"
             android:textSize="18dp"
             android:padding="10dp">
-
         </TextView>
 
         <TextView
@@ -30,10 +29,7 @@
             android:textAlignment="center"
             android:layout_weight="1"
             android:padding="10dp">
-
         </TextView>
-
-
 
     </LinearLayout>
 
