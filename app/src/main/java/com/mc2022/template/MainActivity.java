@@ -3,6 +3,7 @@ package com.mc2022.template;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,6 +11,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -25,8 +28,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     EditText height;
     RadioButton gender;
     RadioGroup rg;
-    String genderVal;
+    Button rssiValue;
 
+
+    String genderVal;
     double prevDisplacement = 0;
     Integer stepCount = 0;
     Integer threshold = 6;
@@ -34,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     float[] gravity;
     float[] geoMagneticField;
     float azimut;
-    float currentDeg = 0f;
     float strideLength;
 
     @Override
@@ -57,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         //EditText ids fetched
         height = (EditText) findViewById(R.id.heightInput);
+
+        //Button ids fetched
+        rssiValue = (Button) findViewById(R.id.buttonRSSI);
 
 
         rg = (RadioGroup) findViewById(R.id.rgroup);
@@ -86,55 +93,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         //Sensor Service
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
-
-        //Accelerometer sensor
-//        accSwi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                if(accSwi.isChecked()){
-//                    Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-//                    if(accelerometer !=null){
-//                        sensorManager.registerListener((SensorEventListener) MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-//                        Toast.makeText(MainActivity.this, "Accelerometer Sensor Activated..!", Toast.LENGTH_SHORT).show();
-//                    }
-//                    else{
-//                        Log.i("Accel-check","Accelerometer NOT Supported!!");
-//                    }
-//                }
-//                else{
-//                    sensorManager.unregisterListener(MainActivity.this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
-//                    accX.setText("0");
-//                    accY.setText("0");
-//                    accZ.setText("0");
-//                    Toast.makeText(MainActivity.this, "Accelerometer Sensor De-Activated..!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-
-        //magnetic field sensor
-//        magSwi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                if(magSwi.isChecked()){
-//                    Sensor magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-//                    if(magnetometer !=null){
-//                        sensorManager.registerListener((SensorEventListener) MainActivity.this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
-//                        Toast.makeText(MainActivity.this, "Magnetometer Sensor Activated..!", Toast.LENGTH_SHORT).show();
-//                    }
-//                    else{
-//                        Log.i("Magne-check","Magnetometer NOT Supported!!");
-//                    }
-//                }
-//                else{
-//                    sensorManager.unregisterListener(MainActivity.this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD));
-//                    magX.setText("0");
-//                    magY.setText("0");
-//                    magZ.setText("0");
-//                    Toast.makeText(MainActivity.this, "Magnetometer Sensor De-Activated..!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
 
 
         //Step detection
@@ -193,6 +151,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         else{
             Log.i("Magne-check","Magnetometer NOT Supported!!");
         }
+
+
+        //RSSI Intent
+        rssiValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, WifiRSSI.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
