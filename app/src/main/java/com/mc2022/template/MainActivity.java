@@ -17,11 +17,14 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
+import com.mikhaellopez.circularfillableloaders.CircularFillableLoaders;
+
+public class MainActivity extends AppCompatActivity implements SensorEventListener{
 
     TextView accX, accY, accZ, magX, magY, magZ, stepC, deg, dist, strideL;
     Switch accSwi, magSwi;
@@ -41,31 +44,48 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     float azimut;
     float strideLength;
 
+
+    //Design Related
+    // Variables Declared
+    CircularFillableLoaders circularFillableLoaders;
+    SeekBar seekBar;
+
+   // int progress = stepCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
+        //Design Related
+        circularFillableLoaders = (CircularFillableLoaders) findViewById(R.id.circularFillableLoaders);
+
+        // Set Progress
+        circularFillableLoaders.setProgress(500 - stepCount);
+
+
+
+
         //TextView ids fetched
-        accX = (TextView) findViewById(R.id.accX);
-        accY = (TextView) findViewById(R.id.accY);
-        accZ = (TextView) findViewById(R.id.accZ);
-        magX = (TextView) findViewById(R.id.magX);
-        magY = (TextView) findViewById(R.id.magY);
-        magZ = (TextView) findViewById(R.id.magZ);
+//        accX = (TextView) findViewById(R.id.accX);
+//        accY = (TextView) findViewById(R.id.accY);
+//        accZ = (TextView) findViewById(R.id.accZ);
+//        magX = (TextView) findViewById(R.id.magX);
+//        magY = (TextView) findViewById(R.id.magY);
+//        magZ = (TextView) findViewById(R.id.magZ);
         stepC = (TextView) findViewById(R.id.steps);
         deg = (TextView) findViewById(R.id.degrees);
         dist = (TextView) findViewById(R.id.distance);
         strideL = (TextView) findViewById(R.id.stride);
-
+//
         //EditText ids fetched
         height = (EditText) findViewById(R.id.heightInput);
 
         //Button ids fetched
         rssiValue = (Button) findViewById(R.id.buttonRSSI);
-
-
+//
+//
         rg = (RadioGroup) findViewById(R.id.rgroup);
         rg.clearCheck();
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -90,14 +110,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             }
         });
-
+//
         //Sensor Service
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
-
+//
+//
         //Step detection
         Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
+//
         SensorEventListener totalSteps = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
@@ -116,11 +136,37 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
                     stepC.setText(stepCount.toString());
 
+                    seekBar = findViewById(R.id.seekBar);
+                    //progress = stepCount;
+                    seekBar.setProgress(stepCount);
+                    seekBar.setMax(500);
+
+                    seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                            // Set Progress
+//                            progress = stepCount % 100;
+//                            progress = 500 - progress;
+                           // Log.i("ProgressBefore: ",Integer.toString(progress));
+                            progress = progress/5;
+                            //Log.i("ProgressAfter: ",Integer.toString(progress));
+                            circularFillableLoaders.setProgress(100 - progress);
+                        }
+
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+
+                        }
+
+                        @Override
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+
+                        }
+                    });
 
 
                     float distance = (float)(stepCount*strideLength)/(float)100000;
-                    dist.setText(Float.toString(distance));
-
+                    dist.setText(String.format("%.4f",distance));
                 }
             }
 
@@ -130,9 +176,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         };
 
+
+//
         sensorManager.registerListener(totalSteps, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-
-
+//
+//
         //Direction detection
 //      Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         if(accelerometer !=null){
@@ -172,9 +220,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 //            Log.i("ACCELEROMETER", "X-axis:" + sensorEvent.values[0] + "Y-axis:" + sensorEvent.values[1]
 //                    + "Z-axis:" + sensorEvent.values[2]);
 
-            accX.setText(Float.toString(sensorEvent.values[0]));
-            accY.setText(Float.toString(sensorEvent.values[1]));
-            accZ.setText(Float.toString(sensorEvent.values[2]));
+//            accX.setText(Float.toString(sensorEvent.values[0]));
+//            accY.setText(Float.toString(sensorEvent.values[1]));
+//            accZ.setText(Float.toString(sensorEvent.values[2]));
 
             gravity = sensorEvent.values;
 
@@ -184,9 +232,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 //            Log.i("MAGNETOMETER", "X-axis:" + sensorEvent.values[0] + "Y-axis:" + sensorEvent.values[1]
 //                    + "Z-axis:" + sensorEvent.values[2]);
 
-            magX.setText(Float.toString(sensorEvent.values[0]));
-            magY.setText(Float.toString(sensorEvent.values[1]));
-            magZ.setText(Float.toString(sensorEvent.values[2]));
+//            magX.setText(Float.toString(sensorEvent.values[0]));
+//            magY.setText(Float.toString(sensorEvent.values[1]));
+//            magZ.setText(Float.toString(sensorEvent.values[2]));
 
             geoMagneticField = sensorEvent.values;
         }
@@ -241,20 +289,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         e.apply();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        SharedPreferences sp = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor e = sp.edit();
-        e.clear();
-        e.putInt("Step-Count", stepCount);
-        e.apply();
-    }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        SharedPreferences sp = getPreferences(MODE_PRIVATE);
+//        SharedPreferences.Editor e = sp.edit();
+//        e.clear();
+//        e.putInt("Step-Count", stepCount);
+//        e.apply();
+//    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SharedPreferences sp = getPreferences(MODE_PRIVATE);
-        stepCount = sp.getInt("Step-Count", 0);
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        SharedPreferences sp = getPreferences(MODE_PRIVATE);
+//        stepCount = sp.getInt("Step-Count", 0);
+//    }
 }

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:background="@drawable/bluepinkbackground">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,317 +18,647 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!--Circular Fallible Loader-->
+        <com.mikhaellopez.circularfillableloaders.CircularFillableLoaders
+            android:id="@+id/circularFillableLoaders"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/circle"
+            app:cfl_border="true"
+            app:cfl_border_width="12dp"
+            app:cfl_wave_amplitude="0.06"
+            app:cfl_wave_color="#52F693" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="-150dp"
+            android:layout_marginBottom="50dp">
+
+            <TextView
+                android:id="@+id/steps"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="15dp">
+                android:text="3400"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-smallcaps"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="50dp">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="/500 steps"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-smallcaps"
+                android:textSize="15dp"
+                android:layout_marginTop="-10dp"
+                android:textStyle="italic">
+
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
 
                 <TextView
-                    android:id="@+id/accelometerText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Accelerometer Data"
-                    android:textSize="24dp">
+                    android:layout_weight="1"
+                    android:text="Distance in km: "
+                    android:textColor="@color/white"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textSize="16dp"
+                    android:textStyle="bold">
+
                 </TextView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/accX"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:hint="X-axis" />
-
-                    <TextView
-                        android:id="@+id/accY"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:hint="Y-axis" />
-
-                    <TextView
-                        android:id="@+id/accZ"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:hint="Z-axis" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="15dp">
-
-                <TextView
-                    android:id="@+id/magnetometerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Magnetometer Data"
-                    android:textSize="24dp">
-                </TextView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/magX"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:hint="X-axis" />
-
-                    <TextView
-                        android:id="@+id/magY"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:hint="Y-axis" />
-
-                    <TextView
-                        android:id="@+id/magZ"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:hint="Z-axis" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/heightText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:text="Enter your height in cm"
-                    android:textAlignment="center"
-                    android:textSize="24dp" />
-
-                <EditText
-                    android:id="@+id/heightInput"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:padding="15dp"
-                    android:hint="Height in cm"
-                    android:inputType="textPersonName"
-                    android:text="0"
-                    android:textSize="24dp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:id="@+id/genderInfo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="5dp"
-                    android:text="Select your gender"
-                    android:textSize="24dp" />
-
-                <RadioGroup
-                    android:id="@+id/rgroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/male"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Male" />
-
-                    <RadioButton
-                        android:id="@+id/female"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Female" />
-                </RadioGroup>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/strideText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:text="Stride Length"
-                    android:textAlignment="center"
-                    android:textSize="24dp" />
-
-                <TextView
-                    android:id="@+id/stride"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:hint="Stride Length"
-                    android:textAlignment="center"
-                    android:textSize="30dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/stepText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:text="Steps"
-                    android:textAlignment="center"
-                    android:textSize="24dp" />
-
-                <TextView
-                    android:id="@+id/steps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:hint="Total Steps"
-                    android:textAlignment="center"
-                    android:textSize="30dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/DirectionText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:text="Direction in Degrees"
-                    android:textAlignment="center"
-                    android:textSize="24dp" />
-
-                <TextView
-                    android:id="@+id/degrees"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:hint="Degrees"
-                    android:textAlignment="center"
-                    android:textSize="30dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/DistanceText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:text="Distance in km"
-                    android:textAlignment="center"
-                    android:textSize="24dp" />
 
                 <TextView
                     android:id="@+id/distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:hint="Distance"
-                    android:textAlignment="center"
-                    android:textSize="30dp" />
+                    android:text="0.0"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textSize="16dp"
+                    android:textStyle="bold">
+
+                </TextView>
+
+
             </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <!--Seek bar to increase fallible part-->
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/circularFillableLoaders"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:background="@drawable/background"
+                android:layout_margin="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/heightText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:text="Enter your height in cms"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold"
+                                    android:fontFamily="sans-serif-smallcaps"
+                                    android:textAlignment="center"
+                                    android:textSize="18dp" />
+
+                                <EditText
+                                    android:id="@+id/heightInput"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:ems="10"
+                                    android:padding="15dp"
+                                    android:hint="0.0 cms"
+                                    android:textColorHint="@color/white"
+                                    android:inputType="textPersonName"
+                                    android:text="0"
+                                    android:textColor="@color/white"
+                                    android:textSize="15dp" />
 
 
-                <TextView
-                    android:id="@+id/WifiRSSI"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:text="Get Wifi RSSI"
-                    android:textAlignment="center"
-                    android:textSize="24dp" />
+                            </LinearLayout>
 
-                <Button
-                    android:id="@+id/buttonRSSI"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Click Here" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:orientation="vertical">
+
+
+                                <TextView
+                                    android:id="@+id/genderInfo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="5dp"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold"
+                                    android:fontFamily="sans-serif-smallcaps"
+                                    android:text="Select your gender :"
+                                    android:textSize="18dp" />
+
+                                <RadioGroup
+                                    android:id="@+id/rgroup"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/male"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:textColor="@color/white"
+                                        android:textStyle="bold"
+                                        android:fontFamily="sans-serif-smallcaps"
+                                        android:text="Male" />
+
+                                    <RadioButton
+                                        android:id="@+id/female"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:textColor="@color/white"
+                                        android:textStyle="bold"
+                                        android:fontFamily="sans-serif-smallcaps"
+                                        android:text="Female" />
+                                </RadioGroup>
+
+                            </LinearLayout>
 
 
             </LinearLayout>
 
+
+
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:background="@drawable/background">
+
+                                <TextView
+                                    android:id="@+id/strideText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:layout_weight="1"
+                                    android:text="Stride Length"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:fontFamily="sans-serif-smallcaps"
+                                    android:textColor="@color/white"
+                                    android:textAlignment="center"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:id="@+id/stride"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:layout_weight="1"
+                                    android:text="0.0"
+                                    android:textStyle="bold"
+                                    android:fontFamily="sans-serif-smallcaps"
+                                    android:textColor="@color/white"
+                                    android:textAlignment="center"
+                                    android:textSize="30dp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:background="@drawable/background">
+
+                <TextView
+                    android:id="@+id/directionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="Direction"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/degrees"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="---"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:textSize="30dp" />
+
+
+            </LinearLayout>
         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@drawable/background"
+                            android:layout_margin="10dp">
+
+
+                            <TextView
+                                android:id="@+id/WifiRSSI"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:layout_weight="1"
+                                android:text="Click on the button below to get Wifi RSSI values"
+                                android:textStyle="bold"
+                                android:fontFamily="sans-serif-smallcaps"
+                                android:textColor="@color/white"
+                                android:textAlignment="center"
+                                android:layout_gravity="center"
+                                android:textSize="24dp" />
+
+                            <Button
+                                android:id="@+id/buttonRSSI"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="20dp"
+                                android:text="Click Here"
+                                android:textStyle="bold"
+                                android:fontFamily="sans-serif-smallcaps"
+                                android:textColor="@color/white"/>
+
+
+                        </LinearLayout>
+
+        </LinearLayout>
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="15dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/accelometerText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Accelerometer Data"-->
+<!--                    android:textSize="24dp">-->
+<!--                </TextView>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/accX"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:gravity="center"-->
+<!--                        android:hint="X-axis" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/accY"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:gravity="center"-->
+<!--                        android:hint="Y-axis" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/accZ"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:gravity="center"-->
+<!--                        android:hint="Z-axis" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="15dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/magnetometerText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Magnetometer Data"-->
+<!--                    android:textSize="24dp">-->
+<!--                </TextView>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/magX"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:gravity="center"-->
+<!--                        android:hint="X-axis" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/magY"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:gravity="center"-->
+<!--                        android:hint="Y-axis" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/magZ"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:gravity="center"-->
+<!--                        android:hint="Z-axis" />-->
+
+<!--                </LinearLayout>-->
+
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/heightText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Enter your height in cm"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textSize="24dp" />-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/heightInput"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:ems="10"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:hint="Height in cm"-->
+<!--                    android:inputType="textPersonName"-->
+<!--                    android:text="0"-->
+<!--                    android:textSize="24dp" />-->
+
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:orientation="vertical">-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/genderInfo"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:padding="5dp"-->
+<!--                    android:text="Select your gender"-->
+<!--                    android:textSize="24dp" />-->
+
+<!--                <RadioGroup-->
+<!--                    android:id="@+id/rgroup"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/male"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Male" />-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/female"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Female" />-->
+<!--                </RadioGroup>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/strideText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Stride Length"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textSize="24dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/stride"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:hint="Stride Length"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textSize="30dp" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/stepText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Steps"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textSize="24dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/steps"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:hint="Total Steps"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textSize="30dp" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/DirectionText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Direction in Degrees"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textSize="24dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/degrees"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:hint="Degrees"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textSize="30dp" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/DistanceText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Distance in km"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textSize="24dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/distance"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:hint="Distance"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textSize="30dp" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/WifiRSSI"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Get Wifi RSSI"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textSize="24dp" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/buttonRSSI"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Click Here" />-->
+
+
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
     </ScrollView>
 
 
