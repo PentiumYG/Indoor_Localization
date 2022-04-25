@@ -1,14 +1,24 @@
 package com.mc2022.template;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,11 +32,17 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mc2022.template.databases.LocDatabase;
+import com.mc2022.template.modelClasses.CurrentLocation;
 import com.mikhaellopez.circularfillableloaders.CircularFillableLoaders;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
 
-    TextView accX, accY, accZ, magX, magY, magZ, stepC, deg, dist, strideL;
+    TextView accX, accY, accZ, magX, magY, magZ, stepC, deg, dist, strideL, lVal, loVal;
     Switch accSwi, magSwi;
     EditText height;
     RadioButton gender;
@@ -50,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     CircularFillableLoaders circularFillableLoaders;
     SeekBar seekBar;
 
-   // int progress = stepCount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             }
         });
+
+
 //
         //Sensor Service
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -136,6 +154,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
                     stepC.setText(stepCount.toString());
 
+
+                    //Code for creating seekbar and animation
                     seekBar = findViewById(R.id.seekBar);
                     //progress = stepCount;
                     seekBar.setProgress(stepCount);
