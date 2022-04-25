@@ -65,7 +65,7 @@ public class ListAdapter extends BaseAdapter {
         wifidb.wifiDAO().insert(wi);
 
         // Get List
-//        List<Wifi> wifiEntries = wifidb.wifiDAO().getList();
+        List<Wifi> wifiEntries = wifidb.wifiDAO().getList();
 //
 //        String wifilist = "";
 //        for(Wifi g : wifiEntries)
@@ -77,8 +77,8 @@ public class ListAdapter extends BaseAdapter {
 //        Log.i("Wifi Database : ",wifilist);
 
 
-        holder.wifiName.setText(wifiList.get(i).SSID);
-        holder.rssiValue.setText(Integer.toString(wifiList.get(i).level));
+        holder.wifiName.setText(wifiEntries.get(i).getWifiName());
+        holder.rssiValue.setText(Integer.toString(wifiEntries.get(i).getRssiVal()));
 
         return view;
     }

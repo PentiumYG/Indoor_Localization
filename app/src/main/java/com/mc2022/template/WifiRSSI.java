@@ -132,7 +132,7 @@ public class WifiRSSI extends AppCompatActivity {
         }
 
 
-        //Location Related
+       // Location Related
         Loc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,23 +145,35 @@ public class WifiRSSI extends AppCompatActivity {
                 locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 1, locLis);
                 Toast.makeText(WifiRSSI.this, "GPS Activated..!", Toast.LENGTH_SHORT).show();
 
-                List<Wifi> wifiNames = adapter.wifidb.wifiDAO().getBestWifi();
-//                for(int i=0;i<wifiList2.size();i++){
-//                    Wifi wifi1 = new Wifi(wifiList2.get(i).SSID, wifiList2.get(i).level);
-//                    wifidb2.wifiDAO().insert(wifi1);
-//                }
-
-                for(Wifi w : wifiNames){
-                    wifiC += w.getWifiName()+"\n";
-                }
-                Log.i("Top 10 WifiNames:", wifiC);
-                wifiN.setText(wifiNames.get(0).getWifiName());
-
-                wifiC = "";
+                wifiN.setText(wifiList2.get(0).SSID);
 
 
             }
         });
+//        if (ContextCompat.checkSelfPermission(WifiRSSI.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(WifiRSSI.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+//        {
+//            ActivityCompat.requestPermissions(WifiRSSI.this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION},1);
+//        }
+//        locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        locLis = new WifiRSSI.LocationFunc();
+//        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 1, locLis);
+//        Toast.makeText(WifiRSSI.this, "GPS Activated..!", Toast.LENGTH_SHORT).show();
+//
+////        List<Wifi> wifiNames = adapter.wifidb.wifiDAO().getBestWifi();
+//////                for(int i=0;i<wifiList2.size();i++){
+//////                    Wifi wifi1 = new Wifi(wifiList2.get(i).SSID, wifiList2.get(i).level);
+//////                    wifidb2.wifiDAO().insert(wifi1);
+//////                }
+////
+////        for(Wifi w : wifiNames){
+////            wifiC += w.getWifiName()+"\n";
+////        }
+////        Log.i("Top 10 WifiNames:", wifiC);
+////        wifiN.setText(wifiNames.get(0).getWifiName());
+////
+////        wifiC = "";
+//
+//        wifiN.setText(wifiList2.get(0).SSID);
 
 
 
