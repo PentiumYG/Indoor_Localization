@@ -44,6 +44,7 @@ public class WifiRSSI extends AppCompatActivity {
     TextView lVal, loVal, wifiN, currlocation;
     Button Loc, currLocB;
     EditText locName;
+    int i = 0;
 
 
     WifiManager wifiMan;
@@ -156,10 +157,11 @@ public class WifiRSSI extends AppCompatActivity {
                 for(CurrentLocation l : currentLocations) {
                     if (currentRSSI == l.getCurrentWifiRSSI()){
                         currentLocationName = l.getLocName();
+                        i = 1;
                         Log.i("LOCATION: ", currentLocationName);
                     }
                 }
-                if(currentLocations.equals("")){
+                if(i == 0){
                     Toast.makeText(WifiRSSI.this, "Location Unavailable!!... Enter new Location..", Toast.LENGTH_SHORT).show();
                 }
                 currlocation.setText(currentLocationName);
