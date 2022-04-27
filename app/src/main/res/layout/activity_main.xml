@@ -316,7 +316,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
                                 android:layout_weight="1"
-                                android:text="Click on the button below to get Nearest Wifi and Wifi's with their corresponding RSSI values"
+                                android:text="Click on the button below to get Nearest Wifi RSSI values and store Location"
                                 android:textStyle="bold"
                                 android:fontFamily="sans-serif-smallcaps"
                                 android:textColor="@color/white"
@@ -339,6 +339,7 @@
 
 
                         </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>

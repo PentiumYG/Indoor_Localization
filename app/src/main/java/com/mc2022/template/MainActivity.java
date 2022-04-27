@@ -94,12 +94,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         deg = (TextView) findViewById(R.id.degrees);
         dist = (TextView) findViewById(R.id.distance);
         strideL = (TextView) findViewById(R.id.stride);
+
 //
         //EditText ids fetched
         height = (EditText) findViewById(R.id.heightInput);
 
         //Button ids fetched
         rssiValue = (Button) findViewById(R.id.buttonRSSI);
+
 //
 //
         rg = (RadioGroup) findViewById(R.id.rgroup);
@@ -126,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             }
         });
-
 
 //
         //Sensor Service

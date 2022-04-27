@@ -41,8 +41,8 @@ import java.util.Locale;
 
 public class WifiRSSI extends AppCompatActivity {
 
-    TextView lVal, loVal, wifiN;
-    Button Loc;
+    TextView lVal, loVal, wifiN, currlocation;
+    Button Loc, currLocB;
     EditText locName;
 
 
@@ -55,6 +55,8 @@ public class WifiRSSI extends AppCompatActivity {
 
     String wifiC = "";
     String locationName = "";
+    String currentLocationName = "";
+    int currentRSSI;
 
 
     //Location related
@@ -67,27 +69,6 @@ public class WifiRSSI extends AppCompatActivity {
         @Override
         public void onLocationChanged(@NonNull Location location) {
 
-            LocDatabase locDatabase = LocDatabase.getInstance(getApplicationContext());
-
-//            lVal.setText(String.valueOf(location.getLatitude()));
-//            loVal.setText(String.valueOf(location.getLongitude()));
-
-//            Geocoder geo = new Geocoder(getApplicationContext(), Locale.getDefault());
-//            List<Address> addresses = null;
-//            try {
-//                addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            if (addresses.isEmpty()) {
-//                nameVal.setText("Waiting for UserLocation");
-//                addrVal.setText("Name not generated yet");
-//            } else {
-//                addrVal.setText(addresses.get(0).getFeatureName() + ", " + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea() + ", " + addresses.get(0).getCountryName());
-//                nameVal.setText(addresses.get(0).getFeatureName() + ", " + addresses.get(0).getLocality());
-//            }
-            Log.i("Location:", location.getLatitude()+"  "+
-                    location.getLongitude());
         }
 
         @Override
@@ -115,6 +96,8 @@ public class WifiRSSI extends AppCompatActivity {
         wifiN = (TextView) findViewById(R.id.nearesrtWifiName);
         Loc = (Button) findViewById(R.id.buttonLoc);
         locName = (EditText) findViewById(R.id.locValue);
+        currLocB = (Button) findViewById(R.id.buttonCurrLoc);
+        currlocation = (TextView) findViewById(R.id.currLoc);
 
 
         //Wifi Services
@@ -127,7 +110,15 @@ public class WifiRSSI extends AppCompatActivity {
         }
         else{
             scanWifiFunc();
+            wifiC = wifiList2.get(0).SSID;
+            currentRSSI = wifiList2.get(0).level;
         }
+
+
+        //K-NN implementation where K=n. (matching all to get correct location. (Highest Precision))
+        List<CurrentLocation> currentLocations;
+        LocDatabase locDatabase = LocDatabase.getInstance(getApplicationContext());
+        currentLocations = locDatabase.locDAO().getList();
 
 
        // Location Related
@@ -146,7 +137,6 @@ public class WifiRSSI extends AppCompatActivity {
                 LocDatabase locDatabase = LocDatabase.getInstance(getApplicationContext());
 
                 locationName = locName.getText().toString();
-                wifiC = wifiList2.get(0).SSID;
 
                 CurrentLocation currentLocation = new CurrentLocation(locationName, wifiC, wifiList2.get(0).level);
                 locDatabase.locDAO().insert(currentLocation);
@@ -156,11 +146,31 @@ public class WifiRSSI extends AppCompatActivity {
                 Intent intent = new Intent(WifiRSSI.this, LocationWifi.class);
                 startActivity(intent);
 
-
-
-
             }
         });
+
+        //Current Location functionality
+        currLocB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for(CurrentLocation l : currentLocations) {
+                    if (currentRSSI == l.getCurrentWifiRSSI()){
+                        currentLocationName = l.getLocName();
+                        Log.i("LOCATION: ", currentLocationName);
+                    }
+                }
+                if(currentLocations.equals("")){
+                    Toast.makeText(WifiRSSI.this, "Location Unavailable!!... Enter new Location..", Toast.LENGTH_SHORT).show();
+                }
+                currlocation.setText(currentLocationName);
+            }
+        });
+
+
+
+
+
+
 //        if (ContextCompat.checkSelfPermission(WifiRSSI.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(WifiRSSI.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
 //        {
 //            ActivityCompat.requestPermissions(WifiRSSI.this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION},1);

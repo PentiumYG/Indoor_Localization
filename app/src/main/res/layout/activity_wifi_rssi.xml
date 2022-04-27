@@ -33,6 +33,60 @@
 
             </TextView>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/background"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Current Location:"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:fontFamily="sans-serif-smallcaps">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/currLoc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Location"
+                        android:textColorHint="@color/white"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:fontFamily="sans-serif-smallcaps">
+
+                    </TextView>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/buttonCurrLoc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Click to get current Location"
+                    android:layout_margin="10dp">
+
+                </Button>
+
+            </LinearLayout>
+
 
 <!--            <LinearLayout-->
 <!--                android:layout_width="match_parent"-->

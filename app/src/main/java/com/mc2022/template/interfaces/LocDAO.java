@@ -24,8 +24,8 @@ public interface LocDAO {
     @Query("DELETE from LocationTable where id = :id")
     void deleteUsingID(int id);
 
-//    @Query("SELECT * FROM (SELECT * FROM LocationTable ORDER BY WifiRSSI DESC) ORDER BY id ASC")
-//    List<Wifi> getBestWifi();
+    @Query("SELECT * FROM (SELECT * FROM LocationTable ORDER BY WifiRSSI DESC LIMIT 10) ORDER BY id ASC")
+    List<CurrentLocation> getBestWifi();
 
     // Delete using object
     @Delete
