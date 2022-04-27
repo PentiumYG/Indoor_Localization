@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.mc2022.template.interfaces.LocDAO;
 import com.mc2022.template.modelClasses.CurrentLocation;
 
-@Database(entities = {CurrentLocation.class},version = 3)
+@Database(entities = {CurrentLocation.class},version = 5)
 public abstract class LocDatabase extends RoomDatabase {
     public abstract LocDAO locDAO();
 

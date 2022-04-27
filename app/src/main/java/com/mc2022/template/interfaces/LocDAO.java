@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.mc2022.template.modelClasses.CurrentLocation;
+import com.mc2022.template.modelClasses.Wifi;
 
 import java.util.List;
 
@@ -22,6 +23,9 @@ public interface LocDAO {
     // Delete using id
     @Query("DELETE from LocationTable where id = :id")
     void deleteUsingID(int id);
+
+//    @Query("SELECT * FROM (SELECT * FROM LocationTable ORDER BY WifiRSSI DESC) ORDER BY id ASC")
+//    List<Wifi> getBestWifi();
 
     // Delete using object
     @Delete

@@ -9,23 +9,27 @@ public class CurrentLocation {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-//    @ColumnInfo(name = "Name")
-//    private String username;
+    @ColumnInfo(name = "LocName")
+    private String locName;
 
-//    @ColumnInfo(name = "Address")
-//    private String useraddress;
+    @ColumnInfo(name = "WifiName")
+    private String currentWifi;
 
-    @ColumnInfo(name = "Latitude")
-    private double userlatitude;
+    @ColumnInfo(name = "WifiRSSI")
+    private int currentWifiRSSI;
 
-    @ColumnInfo(name = "Longitude")
-    private double userlongitude;
+//    @ColumnInfo(name = "Latitude")
+//    private double userlatitude;
+//
+//    @ColumnInfo(name = "Longitude")
+//    private double userlongitude;
 
-    public CurrentLocation(double userlatitude, double userlongitude) {
-//        this.username = username;
-//        this.useraddress = useraddress;
-        this.userlatitude = userlatitude;
-        this.userlongitude = userlongitude;
+    public CurrentLocation(String locName, String currentWifi, int currentWifiRSSI) {
+        this.locName = locName;
+        this.currentWifi = currentWifi;
+        this.currentWifiRSSI = currentWifiRSSI;
+//        this.userlatitude = userlatitude;
+//        this.userlongitude = userlongitude;
     }
 
     public int getId() {
@@ -36,35 +40,42 @@ public class CurrentLocation {
         this.id = id;
     }
 
-//    public String getUsername() {
-//        return username;
+    public String getLocName() {
+        return locName;
+    }
+
+    public void setLocName(String locName) {
+        this.locName = locName;
+    }
+
+    public String getCurrentWifi() {
+        return currentWifi;
+    }
+
+    public void setCurrentWifi(String currentWifi) {
+        this.currentWifi = currentWifi;
+    }
+
+    public int getCurrentWifiRSSI() {
+        return currentWifiRSSI;
+    }
+
+    public void setCurrentWifiRSSI(int currentWifiRSSI) {
+        this.currentWifiRSSI = currentWifiRSSI;
+    }
+//    public double getUserlatitude() {
+//        return userlatitude;
 //    }
 //
-//    public void setUsername(String username) {
-//        this.username = username;
+//    public void setUserlatitude(double userlatitude) {
+//        this.userlatitude = userlatitude;
 //    }
 //
-//    public String getUseraddress() {
-//        return useraddress;
+//    public double getUserlongitude() {
+//        return userlongitude;
 //    }
 //
-//    public void setUseraddress(String useraddress) {
-//        this.useraddress = useraddress;
+//    public void setUserlongitude(double userlongitude) {
+//        this.userlongitude = userlongitude;
 //    }
-
-    public double getUserlatitude() {
-        return userlatitude;
-    }
-
-    public void setUserlatitude(double userlatitude) {
-        this.userlatitude = userlatitude;
-    }
-
-    public double getUserlongitude() {
-        return userlongitude;
-    }
-
-    public void setUserlongitude(double userlongitude) {
-        this.userlongitude = userlongitude;
-    }
 }

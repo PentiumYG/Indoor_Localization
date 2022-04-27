@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,19 +43,18 @@ public class WifiRSSI extends AppCompatActivity {
 
     TextView lVal, loVal, wifiN;
     Button Loc;
+    EditText locName;
 
 
-    Wifi wifi;
     WifiManager wifiMan;
     WifiReceiver wifiRec;
     ListAdapter adapter;
     ListView listView;
     List wifiInfo;
     List<ScanResult> wifiList2;
-//    int wifiRSSI;
-//    List wifiRSSIValues;
 
     String wifiC = "";
+    String locationName = "";
 
 
     //Location related
@@ -69,16 +69,16 @@ public class WifiRSSI extends AppCompatActivity {
 
             LocDatabase locDatabase = LocDatabase.getInstance(getApplicationContext());
 
-            lVal.setText(String.valueOf(location.getLatitude()));
-            loVal.setText(String.valueOf(location.getLongitude()));
+//            lVal.setText(String.valueOf(location.getLatitude()));
+//            loVal.setText(String.valueOf(location.getLongitude()));
 
-            Geocoder geo = new Geocoder(getApplicationContext(), Locale.getDefault());
-            List<Address> addresses = null;
-            try {
-                addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            Geocoder geo = new Geocoder(getApplicationContext(), Locale.getDefault());
+//            List<Address> addresses = null;
+//            try {
+//                addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 //            if (addresses.isEmpty()) {
 //                nameVal.setText("Waiting for UserLocation");
 //                addrVal.setText("Name not generated yet");
@@ -88,9 +88,6 @@ public class WifiRSSI extends AppCompatActivity {
 //            }
             Log.i("Location:", location.getLatitude()+"  "+
                     location.getLongitude());
-
-            CurrentLocation currentLocation = new CurrentLocation(location.getLatitude(), location.getLongitude());
-            locDatabase.locDAO().insert(currentLocation);
         }
 
         @Override
@@ -113,10 +110,11 @@ public class WifiRSSI extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
 
         //Location
-        lVal = (TextView) findViewById(R.id.latitudeValue);
-        loVal = (TextView) findViewById(R.id.longitudeValue);
+//        lVal = (TextView) findViewById(R.id.latitudeValue);
+//        loVal = (TextView) findViewById(R.id.longitudeValue);
         wifiN = (TextView) findViewById(R.id.nearesrtWifiName);
         Loc = (Button) findViewById(R.id.buttonLoc);
+        locName = (EditText) findViewById(R.id.locValue);
 
 
         //Wifi Services
@@ -145,7 +143,20 @@ public class WifiRSSI extends AppCompatActivity {
                 locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 1, locLis);
                 Toast.makeText(WifiRSSI.this, "GPS Activated..!", Toast.LENGTH_SHORT).show();
 
+                LocDatabase locDatabase = LocDatabase.getInstance(getApplicationContext());
+
+                locationName = locName.getText().toString();
+                wifiC = wifiList2.get(0).SSID;
+
+                CurrentLocation currentLocation = new CurrentLocation(locationName, wifiC, wifiList2.get(0).level);
+                locDatabase.locDAO().insert(currentLocation);
+
                 wifiN.setText(wifiList2.get(0).SSID);
+
+                Intent intent = new Intent(WifiRSSI.this, LocationWifi.class);
+                startActivity(intent);
+
+
 
 
             }

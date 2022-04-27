@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/background">
+
+        <TextView
+            android:id="@+id/currentLocationName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Location Name"
+            android:textStyle="italic|bold"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="18dp"
+            android:padding="10dp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/currentWifiName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wifi Name"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:padding="10dp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/currentRssiValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RSSI Value"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:padding="10dp">
+        </TextView>
+
+    </LinearLayout>
+
+</LinearLayout>

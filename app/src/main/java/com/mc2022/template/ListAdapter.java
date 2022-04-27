@@ -20,7 +20,6 @@ public class ListAdapter extends BaseAdapter {
     Context context;
     LayoutInflater inflater;
     List<ScanResult> wifiList;
-    WifiRSSIDatabase wifidb;
     //int wifiRSSI;
 
 
@@ -60,22 +59,13 @@ public class ListAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
+        WifiRSSIDatabase wifidb;
         wifidb = WifiRSSIDatabase.getInstance(context);
         Wifi wi = new Wifi(wifiList.get(i).SSID, wifiList.get(i).level);
         wifidb.wifiDAO().insert(wi);
 
         // Get List
-        List<Wifi> wifiEntries = wifidb.wifiDAO().getList();
-//
-//        String wifilist = "";
-//        for(Wifi g : wifiEntries)
-//        {
-//            wifilist += Integer.toString(g.getId()) + " " + g.getWifiName() + " " + Integer.toString(g.getRssiVal()) + "\n";
-//        }
-//
-//
-//        Log.i("Wifi Database : ",wifilist);
-
+       List<Wifi> wifiEntries = wifidb.wifiDAO().getList();
 
         holder.wifiName.setText(wifiEntries.get(i).getWifiName());
         holder.rssiValue.setText(Integer.toString(wifiEntries.get(i).getRssiVal()));
@@ -87,5 +77,8 @@ public class ListAdapter extends BaseAdapter {
         TextView wifiName;
         TextView rssiValue;
     }
+
+
+
 
 }
