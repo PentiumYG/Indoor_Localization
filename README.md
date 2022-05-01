@@ -1,4 +1,4 @@
-# Assignment 5: Indoor Localization using WIFi
+# Indoor Localization using WIFi
 ● Implementation of indoor localization app that will provide coarse-grained accuracy.
 
 ● Used pedestrian dead reckoning (PDR) to compute displacement from accelerometer
