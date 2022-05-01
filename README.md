@@ -38,12 +38,15 @@ Design an appropriate UI to show the location.
     ● Optional1: implementing the matching with KNN
 
     ● Optional2: Identify anchor points in an indoor environment using sensor fingerprints. You 
-    can manually tag anchor points’ true location. Take 2-3 sensors for identifying sensor fingerprints.
+    can manually tag anchor points’ true location. Take 2-3 sensors for identifying sensor fingerprints.(Not Applied in App)
     
-### Rubric:
-1. Count number of steps: 2 marks, determine direction: 2 marks, stride length: 1 mark
-2. Showcasing this using appropriate UI: 3 marks
-3. Collect RSSI based training data and save: 5 marks
-4. Testing of localization app: UI + returning the correct location: 5 marks
-5. Bonus marks optional 1: 3 marks
-6. Bonus marks optional 2: 3 marks
+## Screenshots
+
+<p>
+    <img src="https://github.com/PentiumYG/Indoor_Localization/blob/Assignment-5/Screenshot1.jpeg" width="250" title="Main_Activity">
+    <img src="https://github.com/PentiumYG/Indoor_Localization/blob/Assignment-5/Screenshot2.jpeg" width="250" title="Main_Activity">
+    <img src="https://github.com/PentiumYG/Indoor_Localization/blob/Assignment-5/Screenshot3.jpeg" width="250" title="Main_Activity">
+    <img src="https://github.com/PentiumYG/Indoor_Localization/blob/Assignment-5/Screenshot4.jpeg" width="250" title="Main_Activity">
+    <img src="https://github.com/PentiumYG/Indoor_Localization/blob/Assignment-5/Screenshot5.jpeg" width="250" title="Main_Activity">
+    <img src="https://github.com/PentiumYG/Indoor_Localization/blob/Assignment-5/Screenshot6.jpeg" width="250" title="Main_Activity">
+</p>
